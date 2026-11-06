@@ -1,0 +1,96 @@
+/* The Midsummer Rain: Capstone Life brand layer (loads after styles.css + brand.css).
+   Brochure language: lavender-violet headings in light Montserrat, mustard-yellow rules,
+   italic serif captions on white tags, white ground. Logo orange appears only inside the logo. */
+:root {
+  --beige: #6A5BA8;          /* Capstone violet (accent) */
+  --beige-soft: rgba(106, 91, 168, .22);
+  --beige-faint: rgba(106, 91, 168, .10);
+  --mustard: #E9D655;
+  --mustard-ink: #3B3510;
+  --italic: "Lora", Georgia, "Times New Roman", serif;
+}
+
+/* headings: violet, light weight, like the brochure */
+.display { font-family: var(--sans); font-weight: 400; color: var(--beige); letter-spacing: -.01em; }
+.display.center::after { content: ""; display: block; width: 56px; height: 3px; margin: 16px auto 0; background: var(--mustard); border-radius: 2px; }
+.dev-title { font-family: var(--sans); font-weight: 400; color: var(--beige); }
+em, .hl-grid em, .intro-text h1 em { font-family: var(--italic); font-style: italic; font-weight: 400; }
+.intro-text h1 { font-family: var(--sans); font-weight: 500; color: var(--ink); }
+.intro-text h1 em { color: var(--beige); }
+.intro-sub { margin: 10px 0 6px; max-width: 70ch; color: var(--grey-2); font-size: 15.5px; }
+.kf-grid svg { color: var(--beige); }
+.kf-grid strong { font-weight: 600; }
+.hl-grid li svg { color: var(--beige); flex: none; }
+.hl-grid strong { font-weight: 600; }
+.why-grid strong { color: var(--beige); font-weight: 300; }
+.eyebrow { color: var(--beige); }
+
+/* header lockup: wide logo */
+.brand-cp img { height: 46px; }
+@media (max-width: 480px) { .brand-cp img { height: 32px; } }
+
+/* buttons */
+.btn { background: var(--dark); }
+.btn:hover { background: var(--beige); }
+.hero-form .btn-submit { background: var(--beige); border-color: var(--beige); color: #fff; }
+.hero-form .btn-submit:hover { background: #544690; border-color: #544690; }
+.fp-pill { background: var(--mustard); color: var(--mustard-ink); }
+
+/* hero: brochure-style lockup on the infinity-pool render */
+.hero-photo { object-position: 60% 55%; }
+.hero-copy { position: relative; }
+.hero-logo { width: clamp(170px, 18vw, 230px); height: auto; margin: 0 0 22px; }
+.hero-name { margin: 0 0 14px; font-family: var(--sans); font-weight: 300; color: var(--mustard); font-size: clamp(44px, 5.4vw, 72px); line-height: .98; letter-spacing: -.01em; padding-left: 18px; border-left: 1px solid rgba(233, 214, 85, .7); }
+.hero-tagline { margin: 0 0 22px; font-family: var(--italic); font-style: italic; font-size: 16px; color: #fff; opacity: .9; max-width: 32ch; }
+.hero-line { color: #EDEAF8; }
+.hero-price { font-family: var(--sans); font-weight: 500; }
+.hero-price span { color: var(--mustard); }
+@media (max-width: 899px) {
+  .hero-logo { margin-left: auto; margin-right: auto; }
+  .hero-name { display: inline-block; text-align: left; }
+  .hero-tagline { margin-left: auto; margin-right: auto; }
+}
+
+/* plan cards use blurred renders */
+.fp-img { background: var(--band); }
+
+/* gallery / map */
+.loc-map button { background: #fff; }
+.loc-no { background: var(--beige); color: #fff; }
+
+/* developer block */
+.about-mark { width: 220px; height: auto; }
+.about-stats strong { color: var(--beige); font-weight: 500; }
+
+/* footer + modal logo */
+.foot-logo { width: 170px; height: auto; margin: 0 0 18px; }
+.modal-logo { width: 150px; height: auto; margin: 0 0 18px; }
+.modal-offer h3 { font-family: var(--sans); font-weight: 400; }
+.modal-eyebrow { color: var(--mustard); }
+
+/* side tab in brand violet */
+.side-tab { background: var(--beige); }
+
+/* payment schedule (Price & Plans) */
+.pay-sched { margin: clamp(36px, 5vw, 56px) auto 24px; max-width: 860px; }
+.pay-title { font-family: var(--sans); font-weight: 500; font-size: 22px; color: var(--beige); text-align: center; margin: 0 0 6px; }
+.pay-lede { text-align: center; color: var(--grey-2); font-size: 15px; margin: 0 0 18px; }
+.pay-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); }
+.pay-table { width: 100%; border-collapse: collapse; font-size: 14.5px; font-variant-numeric: tabular-nums; }
+.pay-table th { background: var(--band); color: var(--ink); font-weight: 600; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; text-align: left; padding: 12px 16px; }
+.pay-table td { padding: 11px 16px; border-top: 1px solid var(--line); color: var(--ink); }
+.pay-table th:nth-child(n+3), .pay-table td:nth-child(n+3) { text-align: right; white-space: nowrap; }
+.pay-table td:first-child { color: var(--grey); width: 3.5em; }
+.pay-table td:nth-child(n+3):not(:empty) { font-weight: 600; color: var(--beige); }
+@media (max-width: 480px) { .pay-table th, .pay-table td { padding: 10px 10px; font-size: 13.5px; } }
+
+/* payment schedule gate: blurred until the visitor enquires */
+.pay-gate { position: relative; }
+.pay-gate:not(.is-unlocked) .pay-wrap { filter: blur(7px); opacity: .55; user-select: none; pointer-events: none; }
+.pay-lock { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 8px; padding: 24px 16px; text-align: center; color: var(--ink); }
+.pay-lock svg { color: var(--beige); }
+.pay-lock-title { margin: 0; font-weight: 600; font-size: 18px; }
+.pay-lock-text { margin: 0 0 8px; max-width: 38ch; color: var(--grey-2); font-size: 14.5px; }
+.pay-gate.is-unlocked .pay-wrap { animation: payIn .5s ease; }
+@keyframes payIn { from { filter: blur(7px); opacity: .55; } to { filter: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .pay-gate.is-unlocked .pay-wrap { animation: none; } }
