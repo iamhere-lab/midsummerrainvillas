@@ -44,6 +44,8 @@
   /* ---------- config-driven content ---------- */
   if (CFG.phoneE164) document.querySelectorAll(".js-phone").forEach(function (a) { a.href = "tel:" + CFG.phoneE164; });
   else document.querySelectorAll(".js-phone").forEach(function (a) { a.hidden = true; });
+  // No sales number: "Request a Call" takes the call button's place and opens the enquiry popup instead.
+  document.querySelectorAll(".js-callback").forEach(function (b) { b.hidden = !!CFG.phoneE164; });
   if (CFG.phoneDisplay) {
     var phoneNb = String(CFG.phoneDisplay).replace(/ /g, "\u00a0");
     document.querySelectorAll(".js-phone-text").forEach(function (s) { s.textContent = phoneNb; });
@@ -103,6 +105,7 @@
   var sending = false; // one request in flight across all forms (hero, popup, inline)
   var anyFormStarted = false;
   var modalIntent = "general";
+  var modalCta = ""; // which button opened the popup ("auto_popup" for the timed one)
 
   var INTENTS = {
     general:    { title: "Unlock price & villa plans", button: "Get Price Sheet & Villa Plans" },
@@ -297,6 +300,7 @@
       consent_text: form.querySelector(".consent-text").textContent.trim(),
       consent_at: new Date().toISOString(),
       form_id: formId,
+      cta_location: formId === "modal" ? (modalCta || "popup") : formId,
       page_url: location.href.split("#")[0],
       submitted_at: new Date().toISOString()
     };
@@ -391,8 +395,9 @@
   var modal = document.getElementById("enquiry-modal");
   var modalTitle = modal.querySelector(".js-modal-title");
 
-  function openEnquiry(intent, config, source) {
+  function openEnquiry(intent, config, source, cta) {
     modalIntent = INTENTS[intent] ? intent : "general";
+    modalCta = cta || (source === "auto" ? "auto_popup" : "");
     modalTitle.textContent = INTENTS[modalIntent].title;
     var form = modal.querySelector("form");
     if (form) {
@@ -434,7 +439,7 @@
     else if (cta) track("cta_click", { cta_location: cta, cta_label: (el.textContent || "").trim().slice(0, 60) });
     if (el.classList.contains("js-open-enquiry")) {
       e.preventDefault();
-      openEnquiry(el.getAttribute("data-intent") || "general", el.getAttribute("data-config"), "click");
+      openEnquiry(el.getAttribute("data-intent") || "general", el.getAttribute("data-config"), "click", cta);
     }
   });
 
