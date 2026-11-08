@@ -300,7 +300,8 @@
       page_url: location.href.split("#")[0],
       submitted_at: new Date().toISOString()
     };
-    ATTR_KEYS.concat(["landing_page", "referrer"]).forEach(function (k) { if (attribution[k]) payload[k] = attribution[k]; });
+    // Always send every attribution key (blank when absent) so the webhook sees a fixed set of fields on every lead.
+    ATTR_KEYS.concat(["landing_page", "referrer"]).forEach(function (k) { payload[k] = attribution[k] || ""; });
 
     btn.disabled = true; sending = true;
     var label = btn.textContent;
