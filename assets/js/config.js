@@ -36,12 +36,12 @@ window.SS_CONFIG = {
 
   /* Channel partner running this site. Shown in About Us, footer and consent line.
    * Google Ads requires the advertiser to be clearly identified: fill these before running ads. */
-  partnerName: "",
+  partnerName: "First Pincode",
   partnerAddress: "",
   partnerEmail: "",
 
   /* Channel-partner / agent RERA number, shown in the footer when set. */
-  agentRera: "",
+  agentRera: "PRM/KA/RERA/1251/309/AG/230419/003592",
 
   /* Named in the consent line: who will contact the enquirer. Confirm before launch. */
   consentEntity: "",
