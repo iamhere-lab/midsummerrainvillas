@@ -21,8 +21,8 @@ window.SS_CONFIG = {
   gtmId: "",
 
   /* Sales number. While empty, every Call button and the header phone pill stay hidden. */
-  phoneDisplay: "",
-  phoneE164: "",
+  phoneDisplay: "98452 00334",
+  phoneE164: "+919845200334",
 
   /* WhatsApp number, digits only with country code, e.g. "919876543210". Buttons stay hidden until set. */
   whatsappNumber: "",
