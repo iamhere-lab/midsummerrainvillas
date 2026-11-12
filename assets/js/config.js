@@ -7,7 +7,7 @@ window.SS_CONFIG = {
   /* Lead delivery. POST target that returns 2xx on success (Pabbly webhook, Vercel function, Apps Script, Leadrat proxy).
    * Leave empty until a real endpoint exists: the form then refuses to submit
    * and points to the phone number instead of showing a fake success message. */
-  leadEndpoint: "https://connect.pabbly.com/webhook-listener/webhook/IjU3NjUwNTY1MDYzNTA0MzY1MjZjNTUzNyI_3D_pc/IjU3NjcwNTZiMDYzNTA0MzY1MjY5NTUzNjUxMzci_pc",
+  leadEndpoint: "https://script.google.com/macros/s/AKfycbzNInoRknhQI8lrcgBVDUhLCGsJS5GkM4F9lYTeJ0BWHZUQcA0eWUhRS48eHXou4N3j/exec",
 
   /* "form" = URL-encoded POST without a CORS preflight (Pabbly / Zapier / Make webhooks).
    * "json" = JSON POST (your own endpoint that answers CORS). */
