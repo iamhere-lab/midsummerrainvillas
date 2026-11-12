@@ -94,3 +94,31 @@ em, .hl-grid em, .intro-text h1 em { font-family: var(--italic); font-style: ita
 .pay-gate.is-unlocked .pay-wrap { animation: payIn .5s ease; }
 @keyframes payIn { from { filter: blur(7px); opacity: .55; } to { filter: none; opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .pay-gate.is-unlocked .pay-wrap { animation: none; } }
+
+/* locked schedule on the main page is a tap target */
+.pay-gate:not(.is-unlocked) { cursor: pointer; }
+.pay-gate:focus-visible { outline: 2px solid var(--beige); outline-offset: 4px; border-radius: var(--radius); }
+
+/* payment plan on the thank-you page */
+.ty-plan { max-width: 860px; margin: clamp(28px, 4vw, 44px) auto 0; background: var(--white); border-radius: 16px; padding-block: clamp(24px, 4vw, 40px); padding-inline: clamp(16px, 4vw, 40px); scroll-margin-top: 90px; }
+.plan-prices { list-style: none; margin: 18px 0 22px; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.plan-prices li { border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; display: grid; gap: 4px; }
+.plan-prices span { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--grey); font-weight: 600; }
+.plan-prices strong { font-size: 26px; font-weight: 500; color: var(--beige); font-variant-numeric: tabular-nums; }
+.plan-prices em { font-size: 13.5px; color: var(--grey-2); }
+.plan-notes { margin: 18px 0 0; padding-left: 18px; color: var(--grey-2); font-size: 13.5px; display: grid; gap: 4px; }
+.plan-locked { text-align: center; display: grid; justify-items: center; gap: 12px; padding: 12px 0 4px; color: var(--grey-2); }
+.plan-locked p { margin: 0; }
+.ty > .wrap { flex-direction: column; align-items: center; }
+.ty-plan { width: 100%; box-shadow: 0 30px 60px -40px rgba(0,0,0,.35); }
+
+/* small phones: fit all four schedule columns without sideways scrolling */
+@media (max-width: 480px) {
+  .pay-table th { font-size: 10.5px; letter-spacing: .02em; }
+  .pay-table th, .pay-table td { padding: 9px 7px; }
+  .pay-table td:first-child { width: 1.8em; }
+}
+@media (max-width: 400px) {
+  .ty-plan { padding-inline: 8px; }
+  .pay-table th, .pay-table td { padding: 9px 5px; }
+}
