@@ -121,13 +121,31 @@
   function unlockPlans() {
     document.querySelectorAll(".fp-grid").forEach(function (g) { g.classList.add("is-unlocked"); });
     document.querySelectorAll(".fp-lock").forEach(function (l) { l.remove(); });
+    /* The real schedule lives only on the thank-you page; here a returning lead gets a link to it. */
     document.querySelectorAll(".js-pay-gate").forEach(function (g) {
-      g.classList.add("is-unlocked");
-      var w = g.querySelector(".pay-wrap"); if (w) { w.removeAttribute("inert"); w.removeAttribute("aria-hidden"); }
-      var l = g.querySelector(".js-pay-lock"); if (l) l.remove();
+      g.classList.add("has-lead");
+      var b = g.querySelector(".js-pay-btn"), v = g.querySelector(".js-pay-view");
+      if (b) b.hidden = true; if (v) v.hidden = false;
+      var tt = g.querySelector(".js-pay-lock-title"), tx = g.querySelector(".js-pay-lock-text");
+      if (tt) tt.textContent = "Your payment plan is ready";
+      if (tx) tx.textContent = "You've already enquired, so the full milestone-wise schedule is open for you.";
     });
   }
-  if (submitted) unlockPlans();
+  var knownLead = submitted;
+  try { knownLead = knownLead || Object.keys(readLeads()).length > 0; } catch (e) {}
+  if (knownLead) unlockPlans();
+
+  /* Tapping anywhere on the locked schedule opens the popup (or the plan, for a returning lead). */
+  document.querySelectorAll(".js-pay-gate").forEach(function (g) {
+    function go(e) {
+      if (e.target.closest("a, button")) return;
+      var v = g.querySelector(".js-pay-view");
+      if (v && !v.hidden) { location.href = v.href; return; }
+      var b = g.querySelector(".js-pay-btn"); if (b) b.click();
+    }
+    g.addEventListener("click", go);
+    g.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(e); } });
+  });
 
   /* ---------- lead forms ---------- */
   var tpl = document.getElementById("lead-form-tpl");
@@ -334,7 +352,7 @@
       track("lead_submit_success", { form_id: formId, intent: intent, configuration: config || "not_specified", lead_id: leadId });
       // One-time pass for the thank-you page: it fires the conversion event only when this is present.
       ss("msr_ty", leadId);
-      if (CFG.thankYouUrl) location.replace(CFG.thankYouUrl); // replace: Back doesn't return to a filled form
+      if (CFG.thankYouUrl) location.replace(CFG.thankYouUrl + (intent === "payment_plan" ? "#payment-plan" : "")); // replace: Back doesn't return to a filled form
       else showSuccess(form, v.name, false, intent);
     }).catch(function (err) {
       clearTimeout(timer);
@@ -376,8 +394,7 @@
       box.appendChild(b);
     }
     if (intent === "payment_plan") {
-      var pb = document.createElement("button"); pb.type = "button"; pb.className = "btn btn-dark"; pb.textContent = "View payment plan";
-      pb.addEventListener("click", function () { if (modal.open) modal.close(); var g = document.querySelector(".js-pay-gate"); if (g) g.scrollIntoView({ behavior: "smooth", block: "center" }); });
+      var pb = document.createElement("a"); pb.className = "btn btn-dark"; pb.href = "thank-you.html#payment-plan"; pb.textContent = "View payment plan";
       box.appendChild(pb);
     }
     if (intent === "brochure" && CFG.brochureUrl) {
