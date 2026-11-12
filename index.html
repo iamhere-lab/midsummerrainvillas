@@ -216,12 +216,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="pay-sched">
       <h3 class="pay-title">Tentative Payment Schedule</h3>
       <p class="pay-lede">The price is paid in two parts, land and construction, each on its own milestones.</p>
-      <div class="pay-gate js-pay-gate"><div class="pay-wrap" inert aria-hidden="true"><table class="pay-table"><thead><tr><th scope="col">No.</th><th scope="col">Milestone</th><th scope="col">Land</th><th scope="col">Construction</th></tr></thead><tbody><tr><td>1</td><td>On booking</td><td>₹10 Lakhs</td><td></td></tr><tr><td>2</td><td>Land &amp; construction agreement (30 days from booking)</td><td>30%</td><td>10%</td></tr><tr><td>3</td><td>Land registration</td><td>70%</td><td></td></tr><tr><td>4</td><td>Footing</td><td></td><td>15%</td></tr><tr><td>5</td><td>Plinth beam</td><td></td><td>10%</td></tr><tr><td>6</td><td>Ground floor slab</td><td></td><td>10%</td></tr><tr><td>7</td><td>First floor slab</td><td></td><td>10%</td></tr><tr><td>8</td><td>Second floor slab</td><td></td><td>10%</td></tr><tr><td>9</td><td>Blockwork</td><td></td><td>10%</td></tr><tr><td>10</td><td>Plastering</td><td></td><td>10%</td></tr><tr><td>11</td><td>Start of finishing works</td><td></td><td>10%</td></tr><tr><td>12</td><td>Handover &amp; completion</td><td></td><td>5%</td></tr></tbody></table></div>
+      <div class="pay-gate js-pay-gate" role="button" tabindex="0" aria-label="Unlock the payment schedule" data-cta="payment_schedule_area">
+        <div class="pay-wrap" inert aria-hidden="true"><table class="pay-table"><thead><tr><th scope="col">No.</th><th scope="col">Milestone</th><th scope="col">Land</th><th scope="col">Construction</th></tr></thead><tbody><tr><td>1</td><td>Milestone ●●●●●●</td><td>●●%</td><td></td></tr><tr><td>2</td><td>Milestone ●●●●●●●●●●</td><td>●●%</td><td>●●%</td></tr><tr><td>3</td><td>Milestone ●●●●●●●</td><td>●●%</td><td></td></tr><tr><td>4</td><td>Milestone ●●●●</td><td></td><td>●●%</td></tr><tr><td>5</td><td>Milestone ●●●●●●</td><td></td><td>●●%</td></tr><tr><td>6</td><td>Milestone ●●●●●●●●</td><td></td><td>●●%</td></tr><tr><td>7</td><td>Milestone ●●●●●</td><td></td><td>●●%</td></tr><tr><td>8</td><td>Milestone ●●●●●●●</td><td></td><td>●●%</td></tr></tbody></table></div>
         <div class="pay-lock js-pay-lock">
           <svg aria-hidden="true" width="26" height="26"><use href="#i-lock"/></svg>
-          <p class="pay-lock-title">Payment schedule is locked</p>
-          <p class="pay-lock-text">Share your details to see the full milestone-wise plan for land and construction.</p>
-          <button class="btn js-open-enquiry" type="button" data-cta="payment_schedule_unlock" data-intent="payment_plan">Unlock Payment Plan</button>
+          <p class="pay-lock-title js-pay-lock-title">Payment schedule is locked</p>
+          <p class="pay-lock-text js-pay-lock-text">Share your details to see the full milestone-wise plan for land and construction.</p>
+          <button class="btn js-open-enquiry js-pay-btn" type="button" data-cta="payment_schedule_unlock" data-intent="payment_plan">Unlock Payment Plan</button>
+          <a class="btn js-pay-view" href="thank-you.html#payment-plan" data-cta="payment_schedule_view" hidden>View Payment Plan</a>
         </div>
       </div>
     </div>

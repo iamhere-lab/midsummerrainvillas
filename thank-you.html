@@ -29,6 +29,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   (function () {
     var id = null;
     try { id = sessionStorage.getItem("msr_ty"); sessionStorage.removeItem("msr_ty"); } catch (e) {}
+    window.MSR_FRESH_LEAD = !!id;
     window.dataLayer.push(id
       ? { event: "lead_thank_you", project: "The Midsummer Rain", lead_id: id }
       : { event: "thank_you_revisit", project: "The Midsummer Rain" });
@@ -77,6 +78,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <p class="ty-note"><strong>Before you visit:</strong> ask the team for the written cost sheet with GST, parking, maintenance deposit and registration listed separately.</p>
       <a class="ty-back" href="index.html">← Back to The Midsummer Rain</a>
     </section>
+
+    <section class="ty-plan" id="payment-plan" aria-labelledby="plan-title">
+      <h2 id="plan-title" class="pay-title">Tentative Payment Schedule · Phase IV</h2>
+      <div class="js-plan-body" hidden>
+        <ul class="plan-prices">
+          <li><span>North Facing Villa</span><strong>₹6.60 Cr*</strong><em>4,187 Sq. Ft. saleable · 2,591 Sq. Ft. plot</em></li>
+          <li><span>East Facing Villa</span><strong>₹6.90 Cr*</strong><em>4,115 Sq. Ft. saleable · 2,591 Sq. Ft. plot</em></li>
+        </ul>
+        <p class="pay-lede">The price is paid in two parts, land and construction, each on its own milestones.</p>
+        <div class="pay-wrap"><table class="pay-table"><thead><tr><th scope="col">No.</th><th scope="col">Milestone</th><th scope="col">Land</th><th scope="col">Construction</th></tr></thead><tbody><tr><td>1</td><td>On booking</td><td>₹10 Lakhs</td><td></td></tr><tr><td>2</td><td>Land &amp; construction agreement (30 days from booking)</td><td>30%</td><td>10%</td></tr><tr><td>3</td><td>Land registration</td><td>70%</td><td></td></tr><tr><td>4</td><td>Footing</td><td></td><td>15%</td></tr><tr><td>5</td><td>Plinth beam</td><td></td><td>10%</td></tr><tr><td>6</td><td>Ground floor slab</td><td></td><td>10%</td></tr><tr><td>7</td><td>First floor slab</td><td></td><td>10%</td></tr><tr><td>8</td><td>Second floor slab</td><td></td><td>10%</td></tr><tr><td>9</td><td>Blockwork</td><td></td><td>10%</td></tr><tr><td>10</td><td>Plastering</td><td></td><td>10%</td></tr><tr><td>11</td><td>Start of finishing works</td><td></td><td>10%</td></tr><tr><td>12</td><td>Handover &amp; completion</td><td></td><td>5%</td></tr></tbody></table></div>
+        <ul class="plan-notes">
+          <li>Premium charges apply for east, corner and park-facing units.</li>
+          <li>Clubhouse charges of ₹7.5 Lakhs are extra.</li>
+          <li>Maintenance charges and deposit are payable at possession, with applicable GST.</li>
+          <li>Stamp paper and registration charges are as per actuals.</li>
+          <li>*Prices and schedule as per the developer's price proposal, subject to change without prior notice.</li>
+        </ul>
+      </div>
+      <div class="plan-locked js-plan-locked">
+        <p>The payment schedule is shared after you enquire.</p>
+        <a class="btn" href="index.html#pricing">Enquire to view the plan</a>
+      </div>
+    </section>
   </div>
 </main>
 
@@ -88,6 +112,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   if (CFG.whatsappNumber) {
     var href = "https://wa.me/" + String(CFG.whatsappNumber).replace(/\D/g, "") + "?text=" + encodeURIComponent(CFG.whatsappMessage || "");
     document.querySelectorAll(".js-whatsapp").forEach(function (a) { a.href = href; a.hidden = false; });
+  }
+
+  /* Payment plan: shown for a lead that just came through the form, or one that enquired from this browser in the last 30 days. */
+  var lead = !!window.MSR_FRESH_LEAD;
+  if (!lead) {
+    try {
+      var all = JSON.parse(localStorage.getItem("msr_leads") || "{}") || {}, now = Date.now();
+      for (var k in all) if (now - all[k] < 30 * 24 * 3600 * 1000) { lead = true; break; }
+    } catch (e) {}
+  }
+  if (lead) {
+    document.querySelectorAll(".js-plan-body").forEach(function (el) { el.hidden = false; });
+    document.querySelectorAll(".js-plan-locked").forEach(function (el) { el.hidden = true; });
   }
 })();
 </script>
